@@ -2,7 +2,7 @@ import React from "react";
 import "./propertyList.css";
 import useFetch from "./../../hooks/useFetch";
 const PropertyList = () => {
-  const { data, loading, error } = useFetch("/hotels/countByType");
+  const { data, loading } = useFetch("/hotels/countByType");
 
   console.log(data);
 

@@ -1,25 +1,21 @@
-import React from 'react'
-import './Navbar.css'
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 const Navbar = () => {
   return (
     <div className="navbar">
       <div className="navContainer">
-        <span className="logo">
-          GreXuke Booking Application
-          </span>
-          <div className="navItems">
-            <button className="navButton">
-              Register
-            </button>
-            <button className="navButton">
-              Login
-            </button>
+        <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+          <span className="logo">GreXuke Booking Application</span>
+        </Link>
 
-          </div>
-        
+        <div className="navItems">
+          <button className="navButton">Register</button>
+          <button className="navButton">Login</button>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Navbar;

@@ -2,7 +2,7 @@ import React from "react";
 import "./featured.css";
 import useFetch from "./../../hooks/useFetch";
 function Featured() {
-  const { data, loading, error } = useFetch(
+  const { data, loading} = useFetch(
     "/hotels/countByCity?cities=bhubaneswar,Kolkata,Mumbai"
   );
 
