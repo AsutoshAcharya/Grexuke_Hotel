@@ -6,7 +6,7 @@ function Featured() {
     "/hotels/countByCity?cities=bhubaneswar,Kolkata,Mumbai"
   );
 
-  console.log(data);
+//   console.log(data);
   return (
     <div className="featured">
       {loading ? (
