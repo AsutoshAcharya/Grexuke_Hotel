@@ -12,19 +12,21 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import MailList from "../../Components/MailList/MailList";
 import useFetch from "./../../hooks/useFetch";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { searchContext } from "./../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
+import Reserve from "../../Components/reserve/Reserve";
 
 const Hotels = () => {
   const location = useLocation();
   const id = location.pathname.toString().split("/");
   const hotelId = id[2];
-
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const { data, loading, error } = useFetch(`/hotels/find/${hotelId}`);
-  const { dates,options } = useContext(searchContext);
+  const { dates, options } = useContext(searchContext);
   // console.log(dates);
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -33,7 +35,10 @@ const Hotels = () => {
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
-  const days=dayDifference(dates[0].endDate, dates[0].startDate);
+  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // const photos = [
   //   {
@@ -70,6 +75,14 @@ const Hotels = () => {
     }
 
     setSlideNumber(newSlideIndex);
+  };
+
+  const handleClick = () => {
+    if (user) {
+      setOpenModal(true);
+    } else {
+      navigate("/login");
+    }
   };
   return (
     <div>
@@ -147,10 +160,10 @@ const Hotels = () => {
                   score of 9.8!
                 </span>
                 <h2>
-                  <b>Rs.{days*data.cheapestPrice*options.room}</b>
+                  <b>Rs.{days * data.cheapestPrice * options.room}</b>
                 </h2>
                 ({days} nights)
-                <button>Reserve or Book now</button>
+                <button onClick={handleClick}>Reserve or Book now</button>
               </div>
             </div>
           </div>
@@ -159,6 +172,7 @@ const Hotels = () => {
           {/*--------------footer to add----------------*/}
         </div>
       )}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={hotelId} />}
     </div>
   );
 };
