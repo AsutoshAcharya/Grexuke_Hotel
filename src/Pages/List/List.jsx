@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import "./list.css";
 import { DateRange } from "react-date-range";
 import SearchItem from "./../../Components/SearchItem/SearchItem";
+import useFetch from "./../../hooks/useFetch";
 const List = () => {
   const location = useLocation();
 
@@ -14,6 +15,19 @@ const List = () => {
   const [date, setDate] = useState(location.state.date);
   const [options, setOptions] = useState(location.state.options);
   const [openDate, setOpenDate] = useState(false);
+
+  const [min, setMin] = useState(undefined);
+  const [max, setMax] = useState(undefined);
+
+  //using custom hook
+  const { data, loading, error, reFetch } = useFetch(
+    `/hotels?city=${destination}&min=${min || 0}&max=${max || 20000}`
+  );
+
+  //
+  const handleClick = () => {
+    reFetch();
+  };
 
   return (
     <div>
@@ -25,7 +39,13 @@ const List = () => {
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
               <label htmlFor="">Destination</label>
-              <input type="text" placeholder={destination} />
+              <input
+                type="text"
+                placeholder={destination}
+                onChange={(e) => {
+                  setDestination(e.target.value);
+                }}
+              />
             </div>
             <div className="lsItem">
               <label htmlFor="">Check-In-Date</label>
@@ -56,6 +76,9 @@ const List = () => {
                   </span>
                   <input
                     type="number"
+                    onChange={(e) => {
+                      setMin(e.target.value);
+                    }}
                     className="lsOptionInput"
                     placeholder=""
                   />
@@ -65,7 +88,13 @@ const List = () => {
                   <span className="lsOptionText">
                     Max Price <small>per night</small>
                   </span>
-                  <input type="number" className="lsOptionInput" />
+                  <input
+                    type="number"
+                    onChange={(e) => {
+                      setMax(e.target.value);
+                    }}
+                    className="lsOptionInput"
+                  />
                 </div>
 
                 <div className="lsOptionItem">
@@ -99,17 +128,18 @@ const List = () => {
                 </div>
               </div>
             </div>
-            <button>Search</button>
+            <button onClick={handleClick}>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            {loading ? (
+              "Loading"
+            ) : (
+              <>
+                {data.map((item) => {
+                  return <SearchItem item={item} key={item._id} />;
+                })}
+              </>
+            )}
           </div>
         </div>
       </div>
