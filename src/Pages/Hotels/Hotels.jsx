@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./hotels.css";
 import Navbar from "./../../Components/Navbar/Navbar";
 import Header from "./../../Components/Header/Header";
@@ -13,6 +13,7 @@ import {
 import MailList from "../../Components/MailList/MailList";
 import useFetch from "./../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
+import { searchContext } from "./../../context/SearchContext";
 
 const Hotels = () => {
   const location = useLocation();
@@ -23,6 +24,16 @@ const Hotels = () => {
   const [open, setOpen] = useState(false);
 
   const { data, loading, error } = useFetch(`/hotels/find/${hotelId}`);
+  const { dates,options } = useContext(searchContext);
+  // console.log(dates);
+
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1, date2) {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return diffDays;
+  }
+  const days=dayDifference(dates[0].endDate, dates[0].startDate);
 
   // const photos = [
   //   {
@@ -107,8 +118,8 @@ const Hotels = () => {
               Excellent Location - {data.distance}m from center
             </span>
             <span className="hotelPricingHighlight">
-              Book a stay over Rs {data.cheapestPrice} at this property and get a free airport
-              taxi
+              Book a stay over Rs {data.cheapestPrice} at this property and get
+              a free airport taxi
             </span>
             <div className="hotelImages">
               {data.photos?.map((photo, i) => {
@@ -127,20 +138,18 @@ const Hotels = () => {
             <div className="hotelDetails">
               <div className="hotelDetailsTexts">
                 <h1 className="hotelTitle">{data.title}</h1>
-                <p className="hotelDesc">
-                  {data.desc}
-                </p>
+                <p className="hotelDesc">{data.desc}</p>
               </div>
               <div className="hotelDetailsPrice">
-                <h1>Prefer for 9-night stay!</h1>
+                <h1>Prefer for {days}-night stay!</h1>
                 <span>
                   Located in bhubaneswar,this property has an excellent location
                   score of 9.8!
                 </span>
                 <h2>
-                  <b>Rs.45000</b>
+                  <b>Rs.{days*data.cheapestPrice*options.room}</b>
                 </h2>
-                (9 nights)
+                ({days} nights)
                 <button>Reserve or Book now</button>
               </div>
             </div>
