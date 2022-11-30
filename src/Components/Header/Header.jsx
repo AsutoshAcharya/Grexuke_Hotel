@@ -16,6 +16,7 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { searchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ type }) => {
   const [openDate, setOpenDate] = useState(false);
@@ -27,6 +28,7 @@ const Header = ({ type }) => {
       key: "selection",
     },
   ]);
+  const { user } = useContext(AuthContext);
 
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
@@ -91,7 +93,7 @@ const Header = ({ type }) => {
               Get rewarded for your travels and unlock savings of 15% or more
               with a free GreXukebooking account
             </p>
-            <button className="headerBtn">SignIn / Register</button>
+            {!user && <button className="headerBtn">SignIn / Register</button>}
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
