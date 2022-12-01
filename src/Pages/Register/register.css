@@ -49,3 +49,9 @@
   background-color: #0071c28c;
   cursor: not-allowed;
 }
+
+.register {
+  background: linear-gradient(to right, rgb(247, 126, 126), rgb(43, 82, 144));
+  background: url(../../assets/pexels-pixabay-258154.jpg) no-repeat center
+    center fixed;
+}

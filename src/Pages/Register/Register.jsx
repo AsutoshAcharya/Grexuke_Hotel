@@ -56,7 +56,7 @@ const Register = () => {
   };
 
   return (
-    <div className="login">
+    <div className="login register">
       <form className="lContainer">
         <input
           required={true}
