@@ -25,7 +25,7 @@ const Hotels = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  const { data, loading, error } = useFetch(`/hotels/find/${hotelId}`);
+  const { data, loading } = useFetch(`/hotels/find/${hotelId}`);
   const { dates, options } = useContext(searchContext);
   // console.log(dates);
 
@@ -156,7 +156,7 @@ const Hotels = () => {
               <div className="hotelDetailsPrice">
                 <h1>Prefer for {days}-night stay!</h1>
                 <span>
-                  Located in bhubaneswar,this property has an excellent location
+                  Located in {data.city},this property has an excellent location
                   score of 9.8!
                 </span>
                 <h2>
