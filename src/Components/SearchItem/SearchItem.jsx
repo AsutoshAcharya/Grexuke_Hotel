@@ -12,7 +12,7 @@ const SearchItem = ({ item }) => {
         <span className="siDistance">{item.distance}m from center</span>
         <span className="siTaxiOp">Free airport Taxi</span>
         <span className="siSubtitle">Room with Air conditioning</span>
-        <span className="siFeatures">{item.desc}</span>
+        {/* <span className="siFeatures">{item.desc}</span>*/}
         <span className="siCancelOp">Free Cancellation</span>
         <span className="siCancelOpSubtitle">
           You Can cancel later,so lock in this great price today

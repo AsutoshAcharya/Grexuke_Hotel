@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./register.css";
 
@@ -9,7 +10,12 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [disabled, setDisabled] = useState(true);
 
+  const navigate = useNavigate();
+
+  const [message, setMessage] = useState(null);
+
   const [err, setErr] = useState("");
+
   const { loading, error, dispatch } = useContext(AuthContext);
 
   useEffect(() => {
@@ -42,7 +48,11 @@ const Register = () => {
       }),
       headers: { "Content-Type": "application/json" },
     });
-    console.log(res);
+    const data = await res.json();
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
+    setMessage(data);
   };
 
   return (
@@ -86,7 +96,12 @@ const Register = () => {
         <button onClick={handleClick} className="lButton" disabled={disabled}>
           Register
         </button>
-        {error && <span>{error.message}</span>}
+        {message && (
+          <p>
+            {message} <br />
+            Navigating to homepage in 3 secs
+          </p>
+        )}
       </form>
     </div>
   );
