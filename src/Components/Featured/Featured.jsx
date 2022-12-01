@@ -2,11 +2,11 @@ import React from "react";
 import "./featured.css";
 import useFetch from "./../../hooks/useFetch";
 function Featured() {
-  const { data, loading} = useFetch(
-    "/hotels/countByCity?cities=bhubaneswar,Kolkata,Mumbai"
+  const { data, loading } = useFetch(
+    "/hotels/countByCity?cities=bhubaneswar,kolkata,mumbai"
   );
 
-//   console.log(data);
+  //   console.log(data);
   return (
     <div className="featured">
       {loading ? (

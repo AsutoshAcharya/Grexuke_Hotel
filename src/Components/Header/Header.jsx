@@ -36,7 +36,7 @@ const Header = ({ type }) => {
     children: 0,
     room: 1,
   });
-
+  //navigate
   const navigate = useNavigate();
 
   const handleOptions = (name, operation) => {
@@ -53,6 +53,10 @@ const Header = ({ type }) => {
   const handleSearch = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", { state: { destination, dates, options } });
+  };
+  //navigate to register on btn click
+  const handleRegister = () => {
+    navigate("/register");
   };
 
   return (
@@ -93,7 +97,11 @@ const Header = ({ type }) => {
               Get rewarded for your travels and unlock savings of 15% or more
               with a free GreXukebooking account
             </p>
-            {!user && <button className="headerBtn">SignIn / Register</button>}
+            {!user && (
+              <button className="headerBtn" onClick={handleRegister}>
+                SignIn / Register
+              </button>
+            )}
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />

@@ -1,0 +1,51 @@
+.login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.validate {
+  background-color: rgb(245, 165, 165);
+  width: 20.3rem;
+  color: rgb(255, 0, 0);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.lInput {
+  height: 30px;
+  padding: 10px;
+  width: 20.3rem;
+  border-radius: 5px;
+  border: none;
+  background-color: aquamarine;
+  outline: none;
+}
+.lInput:hover {
+  transform: scale(1.05);
+  border: 2px;
+  border-color: #0071c2;
+  transition: transform 330ms ease-in-out;
+}
+
+.lButton {
+  border: none;
+  padding: 10px 20px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.lButton:disabled {
+  background-color: #0071c28c;
+  cursor: not-allowed;
+}
