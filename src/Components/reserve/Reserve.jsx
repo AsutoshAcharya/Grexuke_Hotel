@@ -8,15 +8,23 @@ import { searchContext } from "./../../context/SearchContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Reserve = ({ setOpen, hotelId }) => {
+const Reserve = ({ setOpen, hotelId, bookingInfo }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
+  const [roomNumbers, setRoomNumbers] = useState([]);
+
+  const [disabled, setDisabled] = useState(true);
   const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
   const { dates } = useContext(searchContext);
+
+  // console.log(bookingInfo);
 
   //getting dates
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
+
+    // const roomSet=new Set();
+    // const roomNumbers=new Set();
 
     const date = new Date(start.getTime());
 
@@ -42,7 +50,29 @@ const Reserve = ({ setOpen, hotelId }) => {
 
   const handleSelect = (e) => {
     const checked = e.target.checked;
+    // console.log(roomNo);
+    // console.log(e.target.dataset.info);
+    const roomValue = e.target.dataset.info;
+    if (!roomNumbers.includes(e.target.dataset.info)) {
+      const newRoomNumbers = [...roomNumbers, e.target.dataset.info];
+      setRoomNumbers(newRoomNumbers);
+    }
+    console.log(roomNumbers);
+    // console.log(e.target.name);
     const value = e.target.value;
+
+    if (checked) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+      setRoomNumbers(
+        roomNumbers.filter((item) => {
+          return item !== roomValue;
+        })
+      );
+    }
+    console.log(roomNumbers);
+
     setSelectedRooms(
       checked
         ? [...selectedRooms, value]
@@ -92,6 +122,8 @@ const Reserve = ({ setOpen, hotelId }) => {
                   <input
                     type="checkbox"
                     value={roomNumber._id}
+                    name={item.title}
+                    data-info={roomNumber.number}
                     onChange={handleSelect}
                     disabled={!isAvailable(roomNumber)}
                   />
@@ -100,7 +132,7 @@ const Reserve = ({ setOpen, hotelId }) => {
             </div>
           </div>
         ))}
-        <button onClick={handleClick} className="rButton">
+        <button onClick={handleClick} disabled={disabled} className="rButton">
           Reserve Now!
         </button>
       </div>

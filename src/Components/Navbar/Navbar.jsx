@@ -17,11 +17,11 @@ const Navbar = () => {
   const [list, setList] = useState();
 
   const { user } = useContext(AuthContext);
-  const { data } = useFetch(`/booking/${user.username}`);
+  const { data } = useFetch(`/booking/${user?.username}`);
 
   useEffect(() => {
     setList(data);
-    console.table(list);
+    /*console.table(list);*/
   }, [data, list]);
 
   const navigate = useNavigate();

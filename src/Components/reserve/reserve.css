@@ -60,7 +60,7 @@
   gap: 5px;
   font-size: 8px;
   color: gray;
- 
+
   /* background-color: rgb(128, 0, 255); */
 }
 
@@ -79,4 +79,8 @@
   border-radius: 5px;
   width: 100%;
   margin-top: 20px;
+}
+.rButton:disabled {
+  cursor: not-allowed;
+  background-color: #0071c26f;
 }

@@ -25,6 +25,8 @@ const Hotels = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
+  const [bookingInfo, setBookingInfo] = useState({});
+
   const { data, loading } = useFetch(`/hotels/find/${hotelId}`);
   const { dates, options } = useContext(searchContext);
   // console.log(dates);
@@ -35,31 +37,21 @@ const Hotels = () => {
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
-  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  const days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
 
   const { user } = useContext(AuthContext);
+  // console.log(user);
   const navigate = useNavigate();
 
-  // const photos = [
-  //   {
-  //     src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/350635113.jpg?k=91e0199f8634f7dd51382da52d850387d15cffcabb042ca81916f408ddd64399&o=&hp=1",
-  //   },
-  //   {
-  //     src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/350635107.jpg?k=18f5f240970894abccb95ca7f01daa552fc0b2b207cafdd5e26dfcf31c6d72f3&o=&hp=1",
-  //   },
-  //   {
-  //     src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/350635108.jpg?k=dd7d4f85b45818c9eba36f51bb6dddd7d9c9c688cc9aa1fc65657e33e2c25e4e&o=&hp=1",
-  //   },
-  //   {
-  //     src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/350635109.jpg?k=e11f252e4d5d730b54b3440f1b0d262adaeb58fbcacdc5b303dc2a5671503f32&o=&hp=1",
-  //   },
-  //   {
-  //     src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/350635116.jpg?k=a474db7df6e93ca337e5a46826434459e347c4f59349d78829bab1540123512e&o=&hp=1",
-  //   },
-  //   {
-  //     src: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/350635127.jpg?k=fbc21df3107e6a6d4f3d16366de7d46bdd11a752be95c99537a2fdfcf07e8cd5&o=&hp=1",
-  //   },
-  // ];
+  // const bookingInfo={
+  //   username:user.username,
+  //   email:user.email,
+  //   bookedhotel:data.name,
+  //   city:user.city,
+  //   phone:user.phone,
+  //   checkindate:dates[0].startDate,
+  //   checkoutdate:dates[0].endDate,
+  // }
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -78,6 +70,15 @@ const Hotels = () => {
   };
 
   const handleClick = () => {
+    setBookingInfo({
+      username: user.username,
+      email: user.email,
+      bookedhotel: data.name,
+      city: user.city,
+      phone: user.phone,
+      checkindate: dates[0].startDate.toString(),
+      checkoutdate: dates[0].endDate.toString(),
+    });
     if (user) {
       setOpenModal(true);
     } else {
@@ -172,7 +173,13 @@ const Hotels = () => {
           {/*--------------footer to add----------------*/}
         </div>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={hotelId} />}
+      {openModal && (
+        <Reserve
+          setOpen={setOpenModal}
+          bookingInfo={bookingInfo}
+          hotelId={hotelId}
+        />
+      )}
     </div>
   );
 };
