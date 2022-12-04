@@ -21,7 +21,6 @@ const Navbar = () => {
 
   useEffect(() => {
     setList(data);
-    /*console.table(list);*/
   }, [data, list]);
 
   const navigate = useNavigate();
@@ -47,6 +46,9 @@ const Navbar = () => {
   };
 
   const handleBookingDelete = () => {};
+  const viewDetails = () => {
+    
+  };
 
   //loading userBooking data
   const actionColumn = [
@@ -57,21 +59,23 @@ const Navbar = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
+            <Link to="/booking" style={{ textDecoration: "none" }}>
+              <div className="viewButton" onClick={viewDetails}>
+                ViewDetails
+              </div>
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleBookingDelete(params.row._id)}
+              onClick={() => handleBookingDelete()}
             >
-              Delete
+              Cancel Booking
             </div>
           </div>
         );
       },
     },
   ];
-
+//params.row._id
   return (
     <div className="navbar">
       <div className="navContainer">

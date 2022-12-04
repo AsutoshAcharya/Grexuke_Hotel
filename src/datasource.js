@@ -1,19 +1,19 @@
 export  const bookingColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
+  { field: "_id", headerName: "ID", width: 150 },
   {
     field: "bookedhotel",
     headerName: "Title",
-    width: 230,
+    width: 100,
   },
   {
     field: "bookedroom",
     headerName: "BookedRoom",
-    width: 200,
+    width: 100,
   },
   {
     field: "bookedroomnumber",
     headerName: "RoomNumber",
-    width: 100,
+    width: 50,
   },
   {
     field: "checkindate",

@@ -78,6 +78,7 @@ const Hotels = () => {
       phone: user.phone,
       checkindate: dates[0].startDate.toString(),
       checkoutdate: dates[0].endDate.toString(),
+      totalamount:days * data.cheapestPrice * options.room,
     });
     if (user) {
       setOpenModal(true);

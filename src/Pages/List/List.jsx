@@ -26,6 +26,7 @@ const List = () => {
 
   //
   const handleClick = () => {
+    console.log(max);
     reFetch();
   };
 
@@ -92,6 +93,7 @@ const List = () => {
                     type="number"
                     onChange={(e) => {
                       setMax(e.target.value);
+                      
                     }}
                     className="lsOptionInput"
                   />

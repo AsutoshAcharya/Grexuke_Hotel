@@ -17,22 +17,23 @@ const CancellationPolicy = () => {
         justifyContent: "center",
         alignItems: "center",
         padding: "0.5rem",
-        backgroundColor: "rgb(31, 61, 105)",
+        backgroundColor: "white",
       }}
     >
       <Box
         sx={{
-          backgroundColor: "rgb(46, 151, 232)",
+          backgroundColor: "rgb(247, 228, 235)",
           width: "95vw",
           height: "70vh",
           padding: "1rem",
           borderRadius: "0.5rem",
+          boxShadow: "0px 0px 8px rgb(54, 42, 46)",
         }}
       >
-        <Box sx={{ color: "white" }}>
+        <Box sx={{ color: "rgb(10, 55, 110)" }}>
           <Typography variant="h3">GreXuke Cancellation Policy</Typography>
         </Box>
-        <Box sx={{ marginTop: "1rem" }}>
+        <Box sx={{ marginTop: "1rem", color: "rgb(10, 55, 110)" }}>
           <Typography variant="h2">
             Cancellation, deposit and prepayment policies
           </Typography>
@@ -67,16 +68,18 @@ const CancellationPolicy = () => {
       </Box>
       <Box
         sx={{
-          backgroundColor: "rgb(46, 151, 232)",
-
+          backgroundColor: "rgb(247, 228, 235)",
           marginTop: "1rem",
           width: "95vw",
           marginBottom: "0.5rem",
           padding: "1rem",
           borderRadius: "0.5rem",
+          boxShadow: "0px 0px 8px rgb(54, 42, 46)",
         }}
       >
-        <Typography variant="h2">How it works – overview</Typography>
+        <Typography variant="h2" sx={{ color: "rgb(10, 55, 110)" }}>
+          How it works – overview
+        </Typography>
         <br />
 
         <Typography sx={{ fontSize: "1rem" }}>

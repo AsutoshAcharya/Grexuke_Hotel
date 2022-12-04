@@ -7,14 +7,20 @@ import { useContext, useState } from "react";
 import { searchContext } from "./../../context/SearchContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Reserve = ({ setOpen, hotelId, bookingInfo }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
   const [roomNumbers, setRoomNumbers] = useState([]);
 
+  const [rooms, setRooms] = useState([]);
+
   const [disabled, setDisabled] = useState(true);
   const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
   const { dates } = useContext(searchContext);
+
+  const { user,setdetailsData } = useContext(AuthContext);
+  console.log(user);
 
   // console.log(bookingInfo);
 
@@ -52,48 +58,69 @@ const Reserve = ({ setOpen, hotelId, bookingInfo }) => {
     const checked = e.target.checked;
     // console.log(roomNo);
     // console.log(e.target.dataset.info);
-    const roomValue = e.target.dataset.info;
-    if (!roomNumbers.includes(e.target.dataset.info)) {
-      const newRoomNumbers = [...roomNumbers, e.target.dataset.info];
-      setRoomNumbers(newRoomNumbers);
+    const roomNumberValue = e.target.dataset.info;
+    // if (!roomNumbers.includes(e.target.dataset.info)) {
+    //   const newRoomNumbers = [...roomNumbers, e.target.dataset.info];
+    //   setRoomNumbers(newRoomNumbers);
+    // }
+
+    if (!rooms.includes(e.target.name)) {
+      const newRooms = [...rooms, e.target.name];
+      setRooms(newRooms);
     }
-    console.log(roomNumbers);
-    // console.log(e.target.name);
+    // console.log(roomNumbers);
+    // console.log(rooms);
     const value = e.target.value;
 
     if (checked) {
       setDisabled(false);
     } else {
       setDisabled(true);
-      setRoomNumbers(
-        roomNumbers.filter((item) => {
-          return item !== roomValue;
-        })
-      );
     }
-    console.log(roomNumbers);
+    setRoomNumbers(
+      checked
+        ? [...roomNumbers, roomNumberValue]
+        : roomNumbers.filter((room) => room !== roomNumberValue)
+    );
+
+    // setRooms(
+    //   checked
+    //     ? [...rooms, e.target.name]
+    //     : roomNumbers.filter((room) => room !== e.target.name)
+    // );
+    // console.log(rooms);
+
+    // console.log(roomNumbers);
 
     setSelectedRooms(
       checked
         ? [...selectedRooms, value]
         : selectedRooms.filter((item) => item !== value)
     );
+    console.log(selectedRooms);
   };
 
   const navigate = useNavigate();
 
   const handleClick = async () => {
     try {
-      await Promise.all(
+      /* await Promise.all(
         selectedRooms.map((roomId) => {
           const res = axios.put(`/rooms/availability/${roomId}`, {
             dates: alldates,
           });
           return res.data;
         })
-      );
+      );*/
       setOpen(false);
-      navigate("/");
+      setdetailsData(
+        {
+         ...bookingInfo,
+         bookedroom: rooms,
+         bookedroomnumber: roomNumbers,
+       },
+     )
+      navigate("/checkout");
     } catch (err) {}
   };
   return (
