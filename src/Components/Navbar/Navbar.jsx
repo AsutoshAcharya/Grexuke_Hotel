@@ -29,7 +29,6 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
-    // console.log(bookingColumns);
     setAnchorEl(event.currentTarget);
   };
 
