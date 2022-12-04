@@ -1,51 +1,85 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import React from "react";
 import { Typography } from "@mui/material";
+import styled from "@emotion/styled";
+const StyledButton = styled(Button)`
+  &:hover {
+    background-color: rgb(255, 120, 174);
+  }
+`;
 
 const CancellationPolicy = () => {
   return (
-    <Box>
-      <Box sx={{ color: "#194485" }}>
-        <Typography variant="h3">GreXuke Cancelation Policy</Typography>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "0.5rem",
+        backgroundColor: "rgb(31, 61, 105)",
+      }}
+    >
+      <Box
+        sx={{
+          backgroundColor: "rgb(46, 151, 232)",
+          width: "95vw",
+          height: "70vh",
+          padding: "1rem",
+          borderRadius: "0.5rem",
+        }}
+      >
+        <Box sx={{ color: "white" }}>
+          <Typography variant="h3">GreXuke Cancellation Policy</Typography>
+        </Box>
+        <Box sx={{ marginTop: "1rem" }}>
+          <Typography variant="h2">
+            Cancellation, deposit and prepayment policies
+          </Typography>
+          <Typography variant="h5">
+            Clarity for your guests. Guaranteed revenue for you
+            <br />
+            <br />
+          </Typography>
+        </Box>
+        <Box>
+          <Typography>
+            Cancellations are an unavoidable part of hospitality. No matter how
+            much your guests plan their trip, any number of unexpected events
+            can end up affecting their bookings. When that happens, it’s
+            important that they know what to expect – just as it’s important
+            that you don’t miss out on revenue.
+            <br />
+            <br />
+            To make sure your guests know how much you’ll charge them and when,
+            we recommend that you set up the cancellation, deposit and
+            prepayment policies that suit your property. Not only will this help
+            your guests avoid surprises, it’ll also mean that you won’t miss out
+            on revenue unnecessarily.
+            <br />
+            <br />
+            It’s now easier than ever to set up your policies on the extranet.
+            All the main cancellation and payment scenarios are covered, and all
+            you have to do is answer a few key questions to configure your
+            preferred policies.
+          </Typography>
+        </Box>
       </Box>
-      <Box sx={{ marginTop: "1rem" }}>
-        <Typography variant="h2">
-          Cancellation, deposit and prepayment policies
-        </Typography>
-        <Typography variant="h5">
-          Clarity for your guests. Guaranteed revenue for you
-          <br />
-          <br />
-        </Typography>
-      </Box>
-      <Box>
-        <Typography>
-          Cancellations are an unavoidable part of hospitality. No matter how
-          much your guests plan their trip, any number of unexpected events can
-          end up affecting their bookings. When that happens, it’s important
-          that they know what to expect – just as it’s important that you don’t
-          miss out on revenue.
-          <br />
-          <br />
-          To make sure your guests know how much you’ll charge them and when, we
-          recommend that you set up the cancellation, deposit and prepayment
-          policies that suit your property. Not only will this help your guests
-          avoid surprises, it’ll also mean that you won’t miss out on revenue
-          unnecessarily.
-          <br />
-          <br />
-          It’s now easier than ever to set up your policies on the extranet. All
-          the main cancellation and payment scenarios are covered, and all you
-          have to do is answer a few key questions to configure your preferred
-          policies.
-        </Typography>
-      </Box>
+      <Box
+        sx={{
+          backgroundColor: "rgb(46, 151, 232)",
 
-      <Box sx={{ backgroundColor: "blue", color: "white", marginTop: "1rem" }}>
+          marginTop: "1rem",
+          width: "95vw",
+          marginBottom: "0.5rem",
+          padding: "1rem",
+          borderRadius: "0.5rem",
+        }}
+      >
         <Typography variant="h2">How it works – overview</Typography>
         <br />
 
-        <Typography sx={{ color: "#FFFFFF", fontSize: "1rem" }}>
+        <Typography sx={{ fontSize: "1rem" }}>
           You can check your policies in your extranet by clicking on the
           ‘Property’ tab and selecting ‘Policies’. Under ‘Cancellation
           policies’, you can choose between a fully flexible or a customised
@@ -78,6 +112,16 @@ const CancellationPolicy = () => {
           credit cards.
         </Typography>
       </Box>
+      <StyledButton>
+        <Button
+          sx={{
+            backgroundColor: "rgb(227, 34, 111)",
+            color: "#FFFFFF",
+          }}
+        >
+          Cancel Booking
+        </Button>
+      </StyledButton>
     </Box>
   );
 };
