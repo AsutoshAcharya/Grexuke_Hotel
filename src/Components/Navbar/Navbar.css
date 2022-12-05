@@ -35,6 +35,9 @@
   z-index: 32;
 }
 .pop {
-  width: 100rem;
+  width: 150rem;
   margin-top: 0.5rem;
+}
+.profile-btn {
+  box-shadow: 0px 0px 10px #1c7aff;
 }

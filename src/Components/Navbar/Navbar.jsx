@@ -12,6 +12,19 @@ import "./Navbar.css";
 import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useEffect } from "react";
+import styled from "@emotion/styled";
+
+const StyledButton = styled(Button)`
+  float: right;
+  background-color: rgb(237, 29, 14);
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  color: #ffffff;
+  box-shadow: 0px 0px 5px rgb(247, 116, 106);
+  &:hover {
+    background-color: rgb(245, 76, 64);
+  }
+`;
 
 const Navbar = () => {
   const [list, setList] = useState();
@@ -45,10 +58,12 @@ const Navbar = () => {
     navigate("/register");
   };
 
-  const handleBookingDelete = () => {};
-  const viewDetails = () => {
-    
+  const logoutHandler = () => {
+    //logout
   };
+
+  const handleBookingDelete = () => {};
+  const viewDetails = () => {};
 
   //loading userBooking data
   const actionColumn = [
@@ -64,10 +79,7 @@ const Navbar = () => {
                 ViewDetails
               </div>
             </Link>
-            <div
-              className="deleteButton"
-              onClick={() => handleBookingDelete()}
-            >
+            <div className="deleteButton" onClick={() => handleBookingDelete()}>
               Cancel Booking
             </div>
           </div>
@@ -75,7 +87,7 @@ const Navbar = () => {
       },
     },
   ];
-//params.row._id
+  //params.row._id
   return (
     <div className="navbar">
       <div className="navContainer">
@@ -89,7 +101,8 @@ const Navbar = () => {
               aria-describedby={id}
               variant="contained"
               onClick={handleClick}
-              className="user_profile_btn"
+              className="profile-btn"
+              sx={{ borderRadius: "25px" }}
             >
               {user.username} &nbsp;
               <div>
@@ -115,11 +128,11 @@ const Navbar = () => {
                     columns={bookingColumns.concat(actionColumn)}
                     pageSize={9}
                     rowsPerPageOptions={[9]}
-                    checkboxSelection
                     getRowId={(row) => row._id}
                   />
                 )}
               </div>
+              <StyledButton onCLick={{ logoutHandler }}>Logout</StyledButton>
             </Popover>
           </div>
         ) : (

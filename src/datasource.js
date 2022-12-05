@@ -13,7 +13,7 @@ export  const bookingColumns = [
   {
     field: "bookedroomnumber",
     headerName: "RoomNumber",
-    width: 50,
+    width: 100,
   },
   {
     field: "checkindate",
