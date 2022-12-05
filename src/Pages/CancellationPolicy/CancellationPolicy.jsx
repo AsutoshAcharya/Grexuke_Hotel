@@ -2,9 +2,11 @@ import { Box, Button } from "@mui/material";
 import React from "react";
 import { Typography } from "@mui/material";
 import styled from "@emotion/styled";
-import { useLocation } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 const StyledButton = styled(Button)`
+  background-color: rgb(227, 34, 111);
+  color: #ffffff;
   &:hover {
     background-color: rgb(255, 120, 174);
   }
@@ -14,6 +16,18 @@ const CancellationPolicy = () => {
   const location = useLocation();
   const { id } = location.state;
   console.log(id);
+  const navigate = useNavigate();
+  const cancelBooking = async () => {
+    try {
+      await axios.delete(`/booking/${id}`);
+      alert("Your booking has been cancelled redirecting to homepage");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <Box
       sx={{
@@ -120,16 +134,7 @@ const CancellationPolicy = () => {
           credit cards.
         </Typography>
       </Box>
-      <StyledButton>
-        <Button
-          sx={{
-            backgroundColor: "rgb(227, 34, 111)",
-            color: "#FFFFFF",
-          }}
-        >
-          Cancel Booking
-        </Button>
-      </StyledButton>
+      <StyledButton onClick={cancelBooking}>Cancel Booking</StyledButton>
     </Box>
   );
 };
