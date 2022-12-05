@@ -69,6 +69,12 @@ const Navbar = () => {
   const viewDetails = () => {};
 
   //loading userBooking data
+
+  // <Link to="/booking" style={{ textDecoration: "none" }} state={{ id: params.row._id }}>
+  //             <div className="viewButton" onClick={viewDetails}>
+  //               ViewDetails
+  //             </div>
+  //           </Link>
   const actionColumn = [
     {
       field: "action",
@@ -77,11 +83,6 @@ const Navbar = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/booking" style={{ textDecoration: "none" }} state={{ id: params.row._id }}>
-              <div className="viewButton" onClick={viewDetails}>
-                ViewDetails
-              </div>
-            </Link>
             <Link
               to="/cancel"
               style={{ textDecoration: "none" }}

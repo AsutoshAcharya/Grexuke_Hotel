@@ -1,0 +1,5 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to right, rgb(210, 166, 248), rgb(86, 147, 244));
+}

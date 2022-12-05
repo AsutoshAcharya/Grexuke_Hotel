@@ -25,4 +25,9 @@ export  const bookingColumns = [
     headerName: "CheckoutDate",
     width: 100,
   },
+  {
+    field: "amountdue",
+    headerName: "PaymentDue",
+    width: 100,
+  },
 ];
