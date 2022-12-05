@@ -2,6 +2,8 @@ import { Box, Button } from "@mui/material";
 import React from "react";
 import { Typography } from "@mui/material";
 import styled from "@emotion/styled";
+import { useLocation } from "react-router-dom";
+
 const StyledButton = styled(Button)`
   &:hover {
     background-color: rgb(255, 120, 174);
@@ -9,6 +11,9 @@ const StyledButton = styled(Button)`
 `;
 
 const CancellationPolicy = () => {
+  const location = useLocation();
+  const { id } = location.state;
+  console.log(id);
   return (
     <Box
       sx={{

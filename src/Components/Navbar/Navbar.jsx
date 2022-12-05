@@ -59,10 +59,13 @@ const Navbar = () => {
   };
 
   const logoutHandler = () => {
-    //logout
+    localStorage.clear();
+    window.location.reload();
   };
 
-  const handleBookingDelete = () => {};
+  // const handleBookingDelete = () => {
+  //   // navigate("/Cancellation")
+  // };
   const viewDetails = () => {};
 
   //loading userBooking data
@@ -74,14 +77,18 @@ const Navbar = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/booking" style={{ textDecoration: "none" }}>
+            <Link to="/booking" style={{ textDecoration: "none" }} state={{ id: params.row._id }}>
               <div className="viewButton" onClick={viewDetails}>
                 ViewDetails
               </div>
             </Link>
-            <div className="deleteButton" onClick={() => handleBookingDelete()}>
-              Cancel Booking
-            </div>
+            <Link
+              to="/cancel"
+              style={{ textDecoration: "none" }}
+              state={{ id: params.row._id }}
+            >
+              <div className="deleteButton">Cancel Booking</div>
+            </Link>
           </div>
         );
       },
@@ -132,7 +139,7 @@ const Navbar = () => {
                   />
                 )}
               </div>
-              <StyledButton onCLick={{ logoutHandler }}>Logout</StyledButton>
+              <StyledButton onClick={logoutHandler}>Logout</StyledButton>
             </Popover>
           </div>
         ) : (

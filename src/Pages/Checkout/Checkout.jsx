@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 const Checkout = ({ route, navigation }) => {
