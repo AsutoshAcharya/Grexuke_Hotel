@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { Box, Typography } from "@mui/material";
-import PdfFile from "../../Components/PdfFile/PdfFile";
+// import PdfFile from "../../Components/PdfFile/PdfFile";
 
 // import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 // import PdfFile from "../../Components/PdfFile/PdfFile";
@@ -24,12 +24,8 @@ const BookingDetails = () => {
     console.log(id);
     console.log(data);
   };
-
-  return (
-    <div>
-      <PdfFile />
-    </div>
-  );
+  // <PdfFile />
+  return <div></div>;
 };
 
 export default BookingDetails;
