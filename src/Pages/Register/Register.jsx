@@ -6,6 +6,8 @@ import "./register.css";
 import { Box, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+
+import regs from "../../assets/pexels-pixabay-258154.jpg";
 import reg from "../../assets/Register.jpg";
 const Register = () => {
   const [username, setUserName] = useState("");
@@ -15,6 +17,7 @@ const Register = () => {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const [regError, SetRegError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -43,25 +46,32 @@ const Register = () => {
       setDisabled(false);
     }
   }, [password, email, err, username]);
+
   const handleClick = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:8800/api/auth/register", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password,
-        city: city,
-        phone: phone,
-        country: country,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-    const data = await res.json();
-    setTimeout(() => {
-      navigate("/");
-    }, 3000);
-    setMessage(data);
+    try {
+      const res = await fetch("http://localhost:8800/api/auth/register", {
+        method: "POST",
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password,
+          city: city,
+          phone: phone,
+          country: country,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+      // alert("Registration successful! redirecting to homepage");
+      // setTimeout(() => {
+      //   navigate("/");
+      // }, 3000);
+      setMessage(data);
+    } catch (err) {
+      SetRegError(err);
+      console.log(err);
+    }
   };
 
   return (
@@ -74,23 +84,21 @@ const Register = () => {
         justifyContent: "center",
         gap: "2rem",
         flexDirection: "column",
-        backgroundImage: "{reg}",
+        backgroundImage: `url(${regs})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
       }}
     >
-      <Box
-        sx={{
-          width: "100%",
-          backgroundColor: "#FFFFFF",
-          display: "flex",
-          justifyContent: "center",
-          marginLeft: "2rem",
+     
+      <form
+        autoComplete="off"
+        style={{
+          backgroundColor: "#41f2e9",
+          opacity: ".8",
+          padding: "2rem",
+          borderRadius: ".6rem",
         }}
       >
-        <Typography variant="h3" sx={{ color: "blue", fontWeight: "bold" }}>
-          Registration Page
-        </Typography>
-      </Box>
-      <form autocomplete="off">
         <Box
           sx={{
             display: "flex",
@@ -100,13 +108,17 @@ const Register = () => {
             justifyContent: "flex-end",
           }}
         >
-          <Typography sx={{ fontWeight: "bold" }}>Enter Your Name</Typography>
+          <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+            Enter Your Name
+          </Typography>
           <TextField
             id="outlined-basic"
             placeholder="Name"
             variant="outlined"
             required
             size="small"
+            // helperText={username.length > 4 ? " " : "Enter a valid name"}
+            sx={{ backgroundColor: "white", color: "black" }}
             onChange={(e) => {
               setUserName(e.target.value);
             }}
@@ -122,13 +134,16 @@ const Register = () => {
             marginTop: "1rem",
           }}
         >
-          <Typography sx={{ fontWeight: "bold" }}>Enter Your Email</Typography>
+          <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+            Enter Your Email
+          </Typography>
           <TextField
             id="outlined-basic"
             placeholder="Email"
             variant="outlined"
             required
             size="small"
+            sx={{ backgroundColor: "white", color: "black" }}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -144,14 +159,16 @@ const Register = () => {
             marginTop: "1rem",
           }}
         >
-          <Typography sx={{ fontWeight: "bold" }}>
+          <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
             Enter Your Phone Number
           </Typography>
           <TextField
+            type="number"
             id="outlined-basic"
             placeholder="phone number"
             variant="outlined"
             required
+            sx={{ backgroundColor: "white", color: "black" }}
             size="small"
             onChange={(e) => {
               setPhone(e.target.value);
@@ -171,11 +188,14 @@ const Register = () => {
             marginTop: "1rem",
           }}
         >
-          <Typography sx={{ fontWeight: "bold" }}>Enter Your City</Typography>
+          <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+            Enter Your City
+          </Typography>
           <TextField
             id="outlined-basic"
             placeholder="City"
             variant="outlined"
+            sx={{ backgroundColor: "white", color: "black" }}
             required
             size="small"
             onChange={(e) => {
@@ -196,13 +216,14 @@ const Register = () => {
             marginTop: "1rem",
           }}
         >
-          <Typography sx={{ fontWeight: "bold" }}>
+          <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
             Enter Your Country
           </Typography>
           <TextField
             id="outlined-basic"
             placeholder="Country name"
             variant="outlined"
+            sx={{ backgroundColor: "white", color: "black" }}
             required
             size="small"
             onChange={(e) => {
@@ -224,13 +245,14 @@ const Register = () => {
             marginTop: "1rem",
           }}
         >
-          <Typography sx={{ fontWeight: "bold" }}>
+          <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
             Enter Your Password
           </Typography>
           <TextField
             type={"password"}
             id="outlined-basic"
             placeholder="password"
+            sx={{ backgroundColor: "white", color: "black" }}
             required
             variant="outlined"
             size="small"
@@ -242,6 +264,7 @@ const Register = () => {
             <p className="validate">Enter password of length higher than 7</p>
           )} */}
         </Box>
+       
         <Box
           sx={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}
         >
@@ -255,6 +278,12 @@ const Register = () => {
 };
 
 export default Register;
+
+//  { /*regError && (
+//           <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+//             regError
+//           </Typography>
+//         )*/ }
 
 /*const registerPage = `// <div className="login register">
 //   <form className="lContainer">

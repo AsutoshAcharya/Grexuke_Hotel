@@ -70,6 +70,12 @@ const Hotels = () => {
   };
 
   const handleClick = () => {
+    
+    if (user) {
+      setOpenModal(true);
+    } else {
+      navigate("/login");
+    }
     setBookingInfo({
       username: user.username,
       email: user.email,
@@ -80,11 +86,6 @@ const Hotels = () => {
       checkoutdate: dates[0].endDate.toString(),
       totalamount: days * data.cheapestPrice * options.room,
     });
-    if (user) {
-      setOpenModal(true);
-    } else {
-      navigate("/login");
-    }
   };
   return (
     <div>
@@ -123,7 +124,7 @@ const Hotels = () => {
             </div>
           )}
           <div className="hotelWrapper">
-            <button className="bookNow">Reserve or Book Now!</button>
+            
             <h1 className="hotelTitle">{data.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
