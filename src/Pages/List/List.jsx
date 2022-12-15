@@ -85,7 +85,7 @@ const List = () => {
                   />
                 </div>
 
-                <div className="lsOptionItem">
+                <div className="lsOptionItem" style={{ visibility: "hidden" }}>
                   <span className="lsOptionText">
                     Max Price <small>per night</small>
                   </span>
@@ -93,7 +93,6 @@ const List = () => {
                     type="number"
                     onChange={(e) => {
                       setMax(e.target.value);
-                      
                     }}
                     className="lsOptionInput"
                   />

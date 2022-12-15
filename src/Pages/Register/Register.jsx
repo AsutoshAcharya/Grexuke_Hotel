@@ -63,13 +63,15 @@ const Register = () => {
         headers: { "Content-Type": "application/json" },
       });
       const data = await res.json();
-      // alert("Registration successful! redirecting to homepage");
-      // setTimeout(() => {
-      //   navigate("/");
-      // }, 3000);
+    
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
       setMessage(data);
+      alert("Registration successful! redirecting to homepage");
     } catch (err) {
       SetRegError(err);
+      alert(`${err}`)
       console.log(err);
     }
   };
